@@ -8,6 +8,7 @@ Created on Mon Oct  7 23:47:12 2019
 
 try:
     import vrep
+    import datetime
     import time
 except:
     print('--------------------------------------------------------------')
@@ -60,9 +61,8 @@ if clientID != -1:
     print(data)
     time.sleep(0.1)
 
-    file = open("dados.txt", "w+")
+    file = open("dados" + str(datetime.datetime.now().time()) + ".txt", "w+")
     for i in range(int(len(data)/3)):
-        print(i)
         if i+2 < len(data):
             dicto = dict(x=data[i], y=data[i+1], z=data[i+2])
             file.write(str(dicto) + "\n")
