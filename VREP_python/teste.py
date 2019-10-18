@@ -10,6 +10,7 @@ try:
     import vrep
     import datetime
     import time
+    import json
 except:
     print('--------------------------------------------------------------')
     print('"vrep.py" could not be imported. This means very probably that')
@@ -51,29 +52,30 @@ if clientID != -1:
     if error != vrep.simx_return_novalue_flag:
         print(str(error) + '! signalValue')
     error, signalValue = vrep.simxGetStringSignal(clientID, 'measuredDataAtThisTime', vrep.simx_opmode_buffer)
-    print(signalValue)
     data = vrep.simxUnpackFloats(signalValue)
-    print(data)
     time.sleep(0.1)
 
-    error, signalValue = vrep.simxGetStringSignal(clientID, 'measuredDataAtThisTime', vrep.simx_opmode_buffer)
-    data = vrep.simxUnpackFloats(signalValue)
-    print(data)
-    time.sleep(0.1)
+    date = str(datetime.datetime.now().time())
+    date = date.replace(':', '_')
+    date = date.replace('.', '_')
 
-    file = open("dados" + str(datetime.datetime.now().time()) + ".txt", "w+")
-    for i in range(int(len(data)/3)):
-        if i+2 < len(data):
-            dicto = dict(x=data[i], y=data[i+1], z=data[i+2])
-            file.write(str(dicto) + "\n")
+    dataList = []
+    jsonList = []
+    file = open("dados" + date + ".json", "w+")
+
+    while vrep.simxGetConnectionId(clientID) != -1:
+        error, signalValue = vrep.simxGetStringSignal(clientID, 'measuredDataAtThisTime', vrep.simx_opmode_buffer)
+        data = vrep.simxUnpackFloats(signalValue)
+        for i in range(int(len(data)/3)):
+            if i+2 < len(data):
+                dataDict = dict(x=data[i], y=data[i+1], z=data[i+2])
+                dataList.append(dataDict)
+        jsonList.append(dataList)
+        time.sleep(1)
+
+    jsonList = json.dumps(jsonList, indent=4, separators=(',', ': '))
+    file.write(jsonList)
     file.close()
-
-
-    # while clientID == 0:
-    #     error, signalValue = vrep.simxGetStringSignal(clientID, 'measuredDataAtThisTime', vrep.simx_opmode_buffer)
-    #     data = vrep.simxUnpackFloats(signalValue)
-    #     print(data)
-    #     time.sleep(0.1)
 
     # Before closing the connection to V-REP, make sure that the last command sent out had time to arrive. You can guarantee this with (for example):
     vrep.simxGetPingTime(clientID)
