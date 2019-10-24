@@ -50,8 +50,10 @@ if clientID != -1:
 
     error, signalValue = vrep.simxGetStringSignal(clientID, 'measuredDataAtThisTime', vrep.simx_opmode_streaming)
     if error != vrep.simx_return_novalue_flag:
-        print(str(error) + '! signalValue')
+        print(str(error) + '! signalValue_streaming')
     error, signalValue = vrep.simxGetStringSignal(clientID, 'measuredDataAtThisTime', vrep.simx_opmode_buffer)
+    if error != vrep.simx_return_novalue_flag:
+        print(str(error) + '! signalValue_buffer')
     data = vrep.simxUnpackFloats(signalValue)
     time.sleep(0.1)
 
@@ -66,10 +68,9 @@ if clientID != -1:
     while vrep.simxGetConnectionId(clientID) != -1:
         error, signalValue = vrep.simxGetStringSignal(clientID, 'measuredDataAtThisTime', vrep.simx_opmode_buffer)
         data = vrep.simxUnpackFloats(signalValue)
-        for i in range(int(len(data)/3)):
-            if i+2 < len(data):
-                dataDict = dict(x=data[i], y=data[i+1], z=data[i+2])
-                dataList.append(dataDict)
+        for i in range(0, int(len(data)), 3):
+            dataDict = dict(x=data[i], y=data[i+1], z=data[i+2])
+            dataList.append(dataDict)
         jsonList.append(dataList)
         time.sleep(1)
 
