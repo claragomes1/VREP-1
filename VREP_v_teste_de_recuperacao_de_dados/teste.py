@@ -4,6 +4,13 @@
 Created on Mon Oct  7 23:47:12 2019
 
 @author: João Gabriel Fernandes Zenóbio e Clara Loris de Sales Gomes
+
+!!!!!!!!!!!!!!
+TODO: / PARA EXECUTAR O TESTE EM CADA COORDENADA É NECESSÁRIO MODIFICAR QUAL COORDENADA SERÁ GUARDADA NO
+TODO: / ARQUIVO JSON. PARA ISSO MODIFIQUE A LINHA 79 ADICIONANDO +0 PARA COLETAR X, +1 PARA COLETAR Y
+TODO: / E +2 PARA COLETAR O Z EM "data[i<ADICIONE AQUI>]"
+!!!!!!!!!!!!!!
+
 """
 
 import datetime
@@ -70,7 +77,7 @@ if clientID != -1:
             print(str(error) + '! signalValue_buffer')
         data = vrep.simxUnpackFloats(signalValue)
         for i in range(0, int(len(data)), 3):
-            dataDict[str(int(i/3))] = data[i]
+            dataDict[str(int(i/3))] = data[i+0]
         dataList['data'].append(dataDict)
         time.sleep(2)
 
