@@ -31,6 +31,25 @@ clientID = vrep.simxStart('127.0.0.1', 19999, True, True, 5000, 5)
 if clientID != -1:
     print('Connected to remote API server')
 
+    vLeft = 40
+    vRight = 40
+
+    error, leftMotorHandle = vrep.simxGetObjectHandle(clientID, 'Pioneer_p3dx_leftMotor', vrep.simx_opmode_oneshot_wait)
+    if error == vrep.simx_return_timeout_flag:
+        print(str(error) + '! ERROR: simxGetObjectHandle motor esquerdo')
+
+    error, rightMotorHandle = vrep.simxGetObjectHandle(clientID, 'Pioneer_p3dx_rightMotor', vrep.simx_opmode_oneshot_wait)
+    if error == vrep.simx_return_timeout_flag:
+        print(str(error) + '! ERROR: simxGetObjectHandle motor direito')
+
+    error = vrep.simxSetJointTargetVelocity(clientID, leftMotorHandle, vLeft, vrep.simx_opmode_streaming)
+    if error == vrep.simx_return_remote_error_flag:
+        print(str(error) + '! ERROR: simxSetJointTargetVelocity motor esquerdo')
+
+    error = vrep.simxSetJointTargetVelocity(clientID, rightMotorHandle, vRight, vrep.simx_opmode_streaming)
+    if error == vrep.simx_return_remote_error_flag:
+        print(str(error) + '! ERROR: simxSetJointTargetVelocity motor direito')
+
     error, signalValue = vrep.simxGetStringSignal(clientID, 'measuredDataAtThisTime', vrep.simx_opmode_streaming)
     if error == vrep.simx_return_remote_error_flag:
         print(str(error) + '! signalValue_streaming')
