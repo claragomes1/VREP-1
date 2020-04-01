@@ -3,7 +3,7 @@
 """
 Created on Mon Oct  7 23:47:12 2019
 
-@author: João Gabriel Fernandes Zenóbio e Clara Loris de Sales Gomes
+@author: João Gabriel Fernandes Zenóbio and Clara Loris de Sales Gomes
 
 """
 
@@ -30,6 +30,25 @@ clientID = vrep.simxStart('127.0.0.1', 19999, True, True, 5000, 5)
 
 if clientID != -1:
     print('Connected to remote API server')
+
+    vLeft = 40
+    vRight = 40
+
+    error, leftMotorHandle = vrep.simxGetObjectHandle(clientID, 'Pioneer_p3dx_leftMotor', vrep.simx_opmode_oneshot_wait)
+    if error == vrep.simx_return_timeout_flag:
+        print(str(error) + '! ERROR: simxGetObjectHandle left motor')
+
+    error, rightMotorHandle = vrep.simxGetObjectHandle(clientID, 'Pioneer_p3dx_rightMotor', vrep.simx_opmode_oneshot_wait)
+    if error == vrep.simx_return_timeout_flag:
+        print(str(error) + '! ERROR: simxGetObjectHandle right motor')
+
+    error = vrep.simxSetJointTargetVelocity(clientID, leftMotorHandle, vLeft, vrep.simx_opmode_streaming)
+    if error == vrep.simx_return_remote_error_flag:
+        print(str(error) + '! ERROR: simxSetJointTargetVelocity left motor')
+
+    error = vrep.simxSetJointTargetVelocity(clientID, rightMotorHandle, vRight, vrep.simx_opmode_streaming)
+    if error == vrep.simx_return_remote_error_flag:
+        print(str(error) + '! ERROR: simxSetJointTargetVelocity right motor')
 
     error, signalValue = vrep.simxGetStringSignal(clientID, 'measuredDataAtThisTime', vrep.simx_opmode_streaming)
     if error == vrep.simx_return_remote_error_flag:
@@ -68,7 +87,7 @@ if clientID != -1:
     minute = now.minute
     second = now.second
     now = str(year) + "_" + str(month) + "_" + str(day) + "_" + str(hour) + "_" + str(minute) + "_" + str(second)
-    file = open("dados_" + now + ".json", "w+")
+    file = open("data_" + now + ".json", "w+")
     file.write(jsonData)
     file.close()
 
@@ -76,7 +95,7 @@ if clientID != -1:
     vrep.simxGetPingTime(clientID)
     vrep.simxFinish(clientID)
 
-    df = pd.read_json("dados_" + now + ".json", "r")
+    df = pd.read_json("data_" + now + ".json", "r")
 
     fig = go.Figure()
     for i in range(len(df.data)):
