@@ -50,8 +50,6 @@ if clientID != -1:
         data = vrep.simxUnpackFloats(signalValue)
         dataDict = dict()
         for i in range(0, int(len(data)), 3):
-            if i/3 < 90:
-                data[i+2] = -data[i+2]
             dataDict[str(int(i/3))] = data[i+1]
         dataList[str(counter)] = dataDict
         counter += 1
