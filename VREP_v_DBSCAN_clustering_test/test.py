@@ -30,6 +30,23 @@ clientID = sim.simxStart('127.0.0.1', 19999, True, True, 5000, 5)
 if clientID != -1:
     print("Connected to remote API server")
 
+    vLeft = 3
+    vRight = 3
+
+    error, leftMotorHandle = sim.simxGetObjectHandle(clientID, 'Pioneer_p3dx_leftMotor', sim.simx_opmode_oneshot_wait)
+    if error == sim.simx_return_timeout_flag:
+        print(str(error) + '! ERROR: simxGetObjectHandle left motor')
+    error, rightMotorHandle = sim.simxGetObjectHandle(clientID, 'Pioneer_p3dx_rightMotor', sim.simx_opmode_oneshot_wait)
+    if error == sim.simx_return_timeout_flag:
+        print(str(error) + '! ERROR: simxGetObjectHandle right motor')
+
+    error = sim.simxSetJointTargetVelocity(clientID, leftMotorHandle, vLeft, sim.simx_opmode_streaming)
+    if error == sim.simx_return_remote_error_flag:
+        print(str(error) + '! ERROR: simxSetJointTargetVelocity left motor')
+    error = sim.simxSetJointTargetVelocity(clientID, rightMotorHandle, vRight, sim.simx_opmode_streaming)
+    if error == sim.simx_return_remote_error_flag:
+        print(str(error) + '! ERROR: simxSetJointTargetVelocity right motor')
+
     error, signalValue = sim.simxGetStringSignal(clientID, "measuredDataAtThisTime", sim.simx_opmode_streaming)
     if error == sim.simx_return_remote_error_flag:
         print(str(error) + "! signalValue_streaming")
@@ -52,7 +69,19 @@ if clientID != -1:
         if len(dataList) != 0:
             dataComplete.append(dataList)
             counter += 1
-        time.sleep(0.5)
+        if dataList[0] > 1:
+            vLeft = 3
+            vRight = 3.1
+        if dataList[0] < 1:
+            vLeft = 3.1
+            vRight = 3
+        error = sim.simxSetJointTargetVelocity(clientID, leftMotorHandle, vLeft, sim.simx_opmode_streaming)
+        if error == sim.simx_return_remote_error_flag:
+            print(str(error) + '! ERROR: simxSetJointTargetVelocity left motor')
+        error = sim.simxSetJointTargetVelocity(clientID, rightMotorHandle, vRight, sim.simx_opmode_streaming)
+        if error == sim.simx_return_remote_error_flag:
+            print(str(error) + '! ERROR: simxSetJointTargetVelocity right motor')
+        time.sleep(0.1)
 
     # Before closing the connection to V-REP, make sure that the last command sent out had time to arrive. You can guarantee this with (for example):
     sim.simxGetPingTime(clientID)
