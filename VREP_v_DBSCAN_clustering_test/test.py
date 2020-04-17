@@ -30,15 +30,51 @@ clientID = sim.simxStart('127.0.0.1', 19999, True, True, 5000, 5)
 if clientID != -1:
     print("Connected to remote API server")
 
-    vLeft = 3
-    vRight = 3
-
+    error, pioneerHandle = sim.simxGetObjectHandle(clientID, 'Pioneer_p3dx', sim.simx_opmode_oneshot_wait)
+    if error == sim.simx_return_timeout_flag:
+        print(str(error) + '! ERROR: simxGetObjectHandle pioneer')
     error, leftMotorHandle = sim.simxGetObjectHandle(clientID, 'Pioneer_p3dx_leftMotor', sim.simx_opmode_oneshot_wait)
     if error == sim.simx_return_timeout_flag:
-        print(str(error) + '! ERROR: simxGetObjectHandle left motor')
+        print(str(error) + '! ERROR: simxGetObjectHandle leftMotorHandle')
     error, rightMotorHandle = sim.simxGetObjectHandle(clientID, 'Pioneer_p3dx_rightMotor', sim.simx_opmode_oneshot_wait)
     if error == sim.simx_return_timeout_flag:
-        print(str(error) + '! ERROR: simxGetObjectHandle right motor')
+        print(str(error) + '! ERROR: simxGetObjectHandle rightMotorHandle')
+    error, casterFreeHandle = sim.simxGetObjectHandle(clientID, 'Pioneer_p3dx_caster_freeJoint1', sim.simx_opmode_oneshot_wait)
+    if error == sim.simx_return_timeout_flag:
+        print(str(error) + '! ERROR: simxGetObjectHandle casterFreeHandle')
+
+    error = sim.simxSetModelProperty(clientID, pioneerHandle, sim.sim_modelproperty_not_dynamic, sim.simx_opmode_oneshot)
+    if error == sim.simx_return_ok:
+        print(str(error) + '! ERROR: simxSetModelProperty pioneer')
+    error = sim.simxSetModelProperty(clientID, leftMotorHandle, sim.sim_modelproperty_not_dynamic, sim.simx_opmode_oneshot)
+    if error == sim.simx_return_ok:
+        print(str(error) + '! ERROR: simxSetModelProperty leftMotorHandle')
+    error = sim.simxSetModelProperty(clientID, rightMotorHandle, sim.sim_modelproperty_not_dynamic, sim.simx_opmode_oneshot)
+    if error == sim.simx_return_ok:
+        print(str(error) + '! ERROR: simxSetModelProperty rightMotorHandle')
+    error = sim.simxSetModelProperty(clientID, casterFreeHandle, sim.sim_modelproperty_not_dynamic, sim.simx_opmode_oneshot)
+    if error == sim.simx_return_ok:
+        print(str(error) + '! ERROR: simxSetModelProperty casterFreeHandle')
+
+    error = sim.simxSetObjectPosition(clientID, pioneerHandle, -1, (-6.5, -12, 1), sim.simx_opmode_oneshot_wait)
+    if error != sim.simx_return_ok:
+        print(str(error) + '! ERROR: simxSetObjectPosition pioneer')
+
+    error = sim.simxSetModelProperty(clientID, pioneerHandle, not sim.sim_modelproperty_not_dynamic, sim.simx_opmode_oneshot)
+    if error != sim.simx_return_ok:
+        print(str(error) + '! ERROR: simxSetModelProperty pioneer')
+    error = sim.simxSetModelProperty(clientID, leftMotorHandle, not sim.sim_modelproperty_not_dynamic, sim.simx_opmode_oneshot)
+    if error != sim.simx_return_ok:
+        print(str(error) + '! ERROR: simxSetModelProperty leftMotorHandle')
+    error = sim.simxSetModelProperty(clientID, rightMotorHandle, not sim.sim_modelproperty_not_dynamic, sim.simx_opmode_oneshot)
+    if error != sim.simx_return_ok:
+        print(str(error) + '! ERROR: simxSetModelProperty rightMotorHandle')
+    error = sim.simxSetModelProperty(clientID, casterFreeHandle, not sim.sim_modelproperty_not_dynamic, sim.simx_opmode_oneshot)
+    if error != sim.simx_return_ok:
+        print(str(error) + '! ERROR: simxSetModelProperty casterFreeHandle')
+
+    vLeft = 3
+    vRight = 3
 
     error = sim.simxSetJointTargetVelocity(clientID, leftMotorHandle, vLeft, sim.simx_opmode_streaming)
     if error == sim.simx_return_remote_error_flag:
