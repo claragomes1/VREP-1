@@ -5,19 +5,22 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics.cluster import adjusted_rand_score
 
 corredorDf = pd.read_csv('corredor.csv', index_col='object')
-saida_direitaDf = pd.read_csv('saida_direita.csv', index_col='object')
+encruzilhada_direitaDf = pd.read_csv('encruzilhada_direita.csv', index_col='object')
+encruzilhada_esquerdaDf = pd.read_csv('encruzilhada_esquerda.csv', index_col='object')
 
 corredorDf['label'] = ['corredor'] * len(corredorDf)
-saida_direitaDf['label'] = ['saida_direita'] * len(saida_direitaDf)
+encruzilhada_direitaDf['label'] = ['encruzilhada_direita'] * len(encruzilhada_direitaDf)
+encruzilhada_esquerdaDf['label'] = ['encruzilhada_esquerda'] * len(encruzilhada_esquerdaDf)
 
-dfComplet = saida_direitaDf.append(corredorDf, ignore_index=True)
+dfComplet = encruzilhada_direitaDf.append(corredorDf, ignore_index=True)
+dfComplet = encruzilhada_esquerdaDf.append(dfComplet, ignore_index=True)
 dfComplet.dropna(inplace=True)
 
 dfCompletNoLabel = dfComplet.drop(columns=['label'])
-scaler = MinMaxScaler(copy=False)
+scaler = MinMaxScaler(copy=False, feature_range=(0,10))
 scaler.fit(dfCompletNoLabel)
 scaler.transform(dfCompletNoLabel)
-dbscan = DBSCAN(eps=0.12, metric='correlation').fit(dfCompletNoLabel)   # eps=0.017 cosine / eps=0.12 correlation / eps=1.2 euclidean
+dbscan = DBSCAN(eps=0.036, metric='correlation').fit(dfCompletNoLabel)
 dfComplet['cluster'] = dbscan.labels_
 
 score = adjusted_rand_score(dfComplet['label'], dfComplet['cluster'])
