@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0ee30e52-7b09-4ad2-a1fe-b0d0d3f05007" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1boIjq1yR9Op6tAc9o4HwcGP8Jm" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
+  </component>
+  <component name="RunManager" selected="Python.dbscan">
+    <configuration name="PCAtest" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pioneer_test" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/PCAtest.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="dbscan" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pioneer_test" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dbscan.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="junta" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pioneer_test" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/junta.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pioneer_test" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="pioneer_test" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="LD_LIBRARY_PATH" value="$USER_HOME$/webots/lib/controller" />
+      </envs>
+      <option name="SDK_HOME" value="$USER_HOME$/anaconda3/envs/pioneer_test/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pioneer_test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pioneer_test" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="testeCSV" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pioneer_test" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/testeCSV.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.dbscan" />
+        <item itemvalue="Python.test" />
+        <item itemvalue="Python.junta" />
+        <item itemvalue="Python.PCAtest" />
+        <item itemvalue="Python.testeCSV" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="138" y="144" width="1084" height="748" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589304890168">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="138" y="144" width="1084" height="748" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1589304890168" />
+    <state x="643" y="280" width="624" height="544" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1589816877602">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="643" y="280" width="624" height="544" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1589816877602" />
+    <state x="213" y="301" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1589398852618">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="213" y="301" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1589398852618" />
+    <state x="100" y="125" width="1720" height="855" key="DiffContextDialog" timestamp="1589843779480">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="100" y="125" width="1720" height="855" key="DiffContextDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1589843779480" />
+    <state x="1210" y="282" width="495" height="513" key="FileChooserDialogImpl" timestamp="1589816948969">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="1210" y="282" width="495" height="513" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1589816948969" />
+    <state width="1897" height="287" key="GridCell.Tab.0.bottom" timestamp="1589933587812">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1897" height="287" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1589933587812" />
+    <state width="1897" height="287" key="GridCell.Tab.0.center" timestamp="1589933587812">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1897" height="287" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1589933587812" />
+    <state width="1897" height="287" key="GridCell.Tab.0.left" timestamp="1589933587811">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1897" height="287" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1589933587811" />
+    <state width="1897" height="287" key="GridCell.Tab.0.right" timestamp="1589933587812">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1897" height="287" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1589933587812" />
+    <state width="937" height="355" key="GridCell.Tab.1.bottom" timestamp="1589856041890">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="937" height="355" key="GridCell.Tab.1.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1589856041890" />
+    <state width="937" height="355" key="GridCell.Tab.1.center" timestamp="1589856041890">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="937" height="355" key="GridCell.Tab.1.center/0.27.1920.1053@0.27.1920.1053" timestamp="1589856041890" />
+    <state width="937" height="355" key="GridCell.Tab.1.left" timestamp="1589856041889">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="937" height="355" key="GridCell.Tab.1.left/0.27.1920.1053@0.27.1920.1053" timestamp="1589856041889" />
+    <state width="937" height="355" key="GridCell.Tab.1.right" timestamp="1589856041890">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="937" height="355" key="GridCell.Tab.1.right/0.27.1920.1053@0.27.1920.1053" timestamp="1589856041890" />
+    <state x="569" y="209" key="SettingsEditor" timestamp="1589304511600">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="569" y="209" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" timestamp="1589304511600" />
+    <state x="33" y="92" width="1720" height="855" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1589324425002">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="33" y="92" width="1720" height="855" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1589324425002" />
+    <state x="100" y="125" width="1720" height="855" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1589324595952">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="100" y="125" width="1720" height="855" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1589324595952" />
+    <state x="254" y="206" width="432" height="695" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1589318295760">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="254" y="206" width="432" height="695" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.27.1920.1053@0.27.1920.1053" timestamp="1589318295760" />
+    <state x="1103" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1589325526426">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="1103" y="257" width="672" height="678" key="search.everywhere.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1589325526426" />
+  </component>
+</project>
