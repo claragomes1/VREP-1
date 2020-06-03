@@ -40,4 +40,4 @@ while robot.step(TIME_STEP) != -1:
         right_wheel.setVelocity(3.1)
 
 rangeImageCompleteDf = pd.DataFrame(rangeImageComplete)
-rangeImageCompleteDf.to_csv('b.csv')
+rangeImageCompleteDf.to_csv('16.csv')

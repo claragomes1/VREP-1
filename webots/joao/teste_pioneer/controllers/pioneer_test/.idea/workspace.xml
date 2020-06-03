@@ -17,7 +17,6 @@
   <component name="ProjectId" id="1boIjq1yR9Op6tAc9o4HwcGP8Jm" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
     <option name="sortByType" value="true" />
   </component>
@@ -25,6 +24,11 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/CSVs" />
+    </key>
   </component>
   <component name="RunManager" selected="Python.dbscan">
     <configuration name="PCAtest" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -102,7 +106,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/junta.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CSVs/junta.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -188,22 +192,22 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="1210" y="282" width="495" height="513" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1589816948969" />
-    <state width="1897" height="287" key="GridCell.Tab.0.bottom" timestamp="1590617785159">
+    <state width="1897" height="287" key="GridCell.Tab.0.bottom" timestamp="1591145415335">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1897" height="287" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1590617785159" />
-    <state width="1897" height="287" key="GridCell.Tab.0.center" timestamp="1590617785158">
+    <state width="1897" height="287" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1591145415335" />
+    <state width="1897" height="287" key="GridCell.Tab.0.center" timestamp="1591145415334">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1897" height="287" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1590617785158" />
-    <state width="1897" height="287" key="GridCell.Tab.0.left" timestamp="1590617785158">
+    <state width="1897" height="287" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1591145415334" />
+    <state width="1897" height="287" key="GridCell.Tab.0.left" timestamp="1591145415334">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1897" height="287" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1590617785158" />
-    <state width="1897" height="287" key="GridCell.Tab.0.right" timestamp="1590617785159">
+    <state width="1897" height="287" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1591145415334" />
+    <state width="1897" height="287" key="GridCell.Tab.0.right" timestamp="1591145415334">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1897" height="287" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1590617785159" />
+    <state width="1897" height="287" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1591145415334" />
     <state width="1897" height="355" key="GridCell.Tab.1.bottom" timestamp="1590369969492">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -236,6 +240,10 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="254" y="206" width="432" height="695" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.27.1920.1053@0.27.1920.1053" timestamp="1590359966646" />
+    <state x="144" y="253" key="run.anything.popup" timestamp="1591144875624">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="144" y="253" key="run.anything.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1591144875624" />
     <state x="1103" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1589325526426">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>

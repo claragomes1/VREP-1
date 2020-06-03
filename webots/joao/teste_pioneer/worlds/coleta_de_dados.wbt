@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.4316970521696375 0.7786393133351706 0.45536630845614745 1.8563821570621428
-  position -14.59506451841149 13.03849208307227 -0.9245261450135156
+  orientation -0.4728390418329042 0.7670204248533525 0.4337083217743508 1.7345836482238424
+  position -3.4373138485828996 25.839602843485597 0.6697409642610554
 }
 TexturedBackground {
 }
@@ -163,7 +163,7 @@ Solid {
       }
     }
     Wall {
-      translation -18.73 0 -1.5
+      translation -14.11 0 -1.5
       name "wall(8)"
       size 10 1 0.1
       appearance Roughcast {
@@ -188,7 +188,7 @@ Solid {
   boundingObject USE FLORR_SHAPE
 }
 Pioneer3dx {
-  translation -22.37 0.15 0.10993
+  translation -17.96 0.15 -0.89007
   rotation 0 1 0 1.5708
   controller "<extern>"
   extensionSlot [
