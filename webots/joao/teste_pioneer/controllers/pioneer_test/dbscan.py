@@ -9,7 +9,7 @@ from sklearn.metrics.cluster import adjusted_rand_score
 from sklearn.cluster import OPTICS
 from sklearn.cluster import DBSCAN
 
-# complete_df = pd.read_csv('CSVs/complete.csv', index_col='object')
+# complete_df = pd.read_csv('CSVs_complete/complete.csv', index_col='object')
 # complete_df_no_label = complete_df.drop(columns=['label'])
 
 df_1 = pd.read_csv('11.csv', index_col=0)
