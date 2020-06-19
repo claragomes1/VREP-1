@@ -1,47 +1,81 @@
 import pandas as pd
 import plotly.express as px
-import plotly.figure_factory as ff
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
-from sklearn import decomposition
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import RobustScaler
 from sklearn.metrics.cluster import adjusted_rand_score
 from sklearn.cluster import OPTICS
 from sklearn.cluster import DBSCAN
+import math
 
-corredor_df = pd.read_csv('corredor.csv')
+corredor_df = pd.read_csv('corredor.csv', index_col=0)
 
 #-------------------------------------------------------------------------------------------------------------------------
 
-delta_y = []
-delta_y_complete = []
-for line in corredor_df.values:
-	weight = list(range(90))
-	counter = -1
-	sinal = 1
-	for i in range(len(line)-1):
-		counter += sinal
-		if counter == 90 or counter == -1:
-			sinal *= -1
-			counter += sinal
-		counter += sinal
-		delta_y.append((line[i] - line[i+1]) * weight[counter])
-	delta_y_complete.append(delta_y)
-	delta_y = []
+x_list = []
+y_list = []
+id_list = []
+cluster_list = []
+for i in range(len(corredor_df.values)):
+    x_temp = []
+    y_temp = []
+    for j in range(len(corredor_df.values[i])):
+        x = corredor_df.values[i][j] * math.cos(math.radians(j - 90))
+        y = corredor_df.values[i][j] * math.sin(math.radians(j - 90))
+        x_temp.append(x)
+        y_temp.append(y)
+        x_list.append(x)
+        y_list.append(y)
+        id_list.append(i)
+    x_y_df_temp = pd.DataFrame(data={'x': x_temp, 'y': y_temp})
+    dbscan = DBSCAN(eps=0.4, metric='euclidean').fit(x_y_df_temp)
+    for label in dbscan.labels_:
+        cluster_list.append(label)
 
-fig = px.scatter(y=delta_y_complete[0])
+x_y_df = pd.DataFrame(data={'x': x_list, 'y': y_list, 'id': id_list, 'cluster': cluster_list})
+
+fig = px.scatter(x_y_df, x='x', y='y', color='cluster', animation_frame='id', range_x=[-5, 5], range_y=[-5, 5])
+fig.update_yaxes(dtick=0.5)
+fig.update_xaxes(dtick=0.5)
+fig.update_layout(height=500, width=500, title_text="Corredor")
 fig.show()
 
-# delta_y_df = pd.DataFrame(delta_y_complete)
-# delta_y_df.to_csv('delta_y.csv')
-#
-# dbscan = DBSCAN(eps=5, metric='euclidean').fit(delta_y_df)
-# delta_y_df['cluster'] = dbscan.labels_
-#
-# fig = px.scatter(delta_y_df, x=delta_y_df.index, y="cluster")
+# labels = []
+# for line in corredor_df.values:
+#     x = []
+#     y = []
+#     for i in range(len(line)):
+#         x.append(line[i] * math.cos(math.radians(i - 90)))
+#         y.append(line[i] * math.sin(math.radians(i - 90)))
+#     x_y_df = pd.DataFrame()
+#     x_y_df['x'] = x
+#     x_y_df['y'] = y
+#     dbscan = DBSCAN(eps=0.2, metric='euclidean').fit(x_y_df)
+#     labels.append(dbscan.labels_)
+# labels_df = pd.DataFrame(labels)
+# dbscan = DBSCAN(eps=0.1, metric='correlation').fit(labels_df)
+# labels_df['cluster'] = dbscan.labels_
+
+# fig = px.scatter(labels_df, x=labels_df.index, y='cluster')
+# fig.show()
+
+# fig = px.scatter(topography_map_df, x='x', y='y', color='label', range_x=[-5, 5], range_y=[-5, 5])
+# fig.update_yaxes(dtick=0.5)
+# fig.update_xaxes(dtick=0.5)
+# fig.update_layout(height=500, width=500, title_text="Corredor")
 # fig.show()
 
 #-------------------------------------------------------------------------------------------------------------------------
+
+# delta_y_complete = []
+# for line in corredor_df.values:
+# 	delta_y = []
+# 	for i in range(len(line)-1):
+# 		delta_y.append((line[i] - line[i+1]))
+# 	delta_y_complete.append(delta_y)
+
+# delta_y_df = pd.DataFrame(delta_y_complete)
+# delta_y_df.to_csv('delta_y.csv')
 
 # delta_y_df = pd.read_csv('delta_y.csv')
 # pca = decomposition.PCA(n_components=5)
