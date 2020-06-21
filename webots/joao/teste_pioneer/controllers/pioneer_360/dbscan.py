@@ -13,7 +13,7 @@ import plotly.graph_objects as go
 
 # Carrega dados
 
-corredor_df = pd.read_csv('corredor.csv', index_col=0)
+# corredor_df = pd.read_csv('corredor.csv', index_col=0)
 
 # -------------------------------------------------------------------------------------------------------------------------
 
@@ -64,7 +64,7 @@ corredor_df = pd.read_csv('corredor.csv', index_col=0)
 # -------------------------------------------------------------------------------------------------------------------------
 
 # Gera animação das leituras
-
+#
 # x_y_df_animacao = pd.read_csv('x_y_df_animacao.csv', index_col=0)
 # print(x_y_df_animacao)
 #
@@ -100,7 +100,7 @@ corredor_df = pd.read_csv('corredor.csv', index_col=0)
 # )
 # fig.update_layout(height=1200, width=1250, title_text="Evolução das leituras")
 # fig.show()
-
+#
 # labels_df = pd.read_csv('labels_df.csv', index_col=0)
 # dbscan = DBSCAN(eps=0.1, metric='correlation').fit(labels_df)
 # labels_df['label'] = dbscan.labels_
