@@ -1,4 +1,4 @@
-"""pioneer_test controller"""
+"""pioneer_180 controller"""
 
 from controller import Robot
 import pandas as pd
