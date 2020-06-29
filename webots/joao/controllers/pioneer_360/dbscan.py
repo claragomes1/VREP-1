@@ -1,4 +1,5 @@
 import math
+import statistics
 import pandas as pd
 import numpy as np
 from sklearn.cluster import DBSCAN
@@ -32,7 +33,7 @@ import plotly.graph_objects as go
 #         x.append(line[i] * math.cos(math.radians(i - 90)))
 #         y.append(line[i] * math.sin(math.radians(i - 90)))
 #     x_y_df = pd.DataFrame(data={'x': x, 'y': y})
-#     dbscan = DBSCAN(eps=0.3, metric='euclidean').fit(x_y_df)
+#     dbscan = DBSCAN(eps=0.35, metric='euclidean').fit(x_y_df)
 #     labels_temp = [-1] * len(dbscan.labels_)
 #     label_counter = 0
 #     visited = 0
@@ -54,14 +55,24 @@ import plotly.graph_objects as go
 #         id_complete.append(each)
 #     for each in labels_temp:
 #         labels_complete.append(each)
-# topography_df = pd.DataFrame(data={'x': x_complete, 'y': y_complete, 'id': id_complete, 'label': labels_complete})
+#
+# distance_complete = []
+# for reading in range(len(corredor_df)):
+#     for degree in corredor_df.values[reading]:
+#         distance_complete.append(degree)
+#
+# topography_df = pd.DataFrame(data={'x': x_complete, 'y': y_complete, 'distance': distance_complete, 'id': id_complete, 'label': labels_complete})
 # topography_df.to_csv('topography_df.csv')
+
+# -------------------------------------------------------------------------------------------------------------------------
+
+
 
 # -------------------------------------------------------------------------------------------------------------------------
 
 # Gera animação das leituras
 
-# topography_df = pd.read_csv('topography_df.csv', index_col=0)
+# topography_df = pd.read_csv('topography_df_2.csv', index_col=0)
 # fig = px.scatter(topography_df, x='x', y='y', color='label', animation_frame='id', range_x=[-5, 5], range_y=[-5, 5])
 # fig.update_yaxes(dtick=0.5)
 # fig.update_xaxes(dtick=0.5)
@@ -93,3 +104,15 @@ import plotly.graph_objects as go
 # fig.show()
 
 # -------------------------------------------------------------------------------------------------------------------------
+
+# Notes:
+
+# ...
+
+# DBSCAN da média das distâncias dos clusters formados -> clusters podem estar proximos e separados do quadrado do corredor X
+
+# Analisar o afastamento e a aproximação -> numero impar de clusters impede fazer de forma automática X
+
+# DBSCAN na lista de labels_ gerados -> os clusters variam de posição conforme o robô anda e as dimensões fixas fazem com
+# que estar próximo de uma saída a direita é um cluster e estar afastado é outro independente se o robô está entre elas,
+# o que significa estar no corredor.
