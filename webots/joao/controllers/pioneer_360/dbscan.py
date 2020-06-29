@@ -66,13 +66,13 @@ import plotly.graph_objects as go
 
 # -------------------------------------------------------------------------------------------------------------------------
 
-
+#...
 
 # -------------------------------------------------------------------------------------------------------------------------
 
 # Gera animação das leituras
 
-# topography_df = pd.read_csv('topography_df_2.csv', index_col=0)
+# topography_df = pd.read_csv('topography_df.csv', index_col=0)
 # fig = px.scatter(topography_df, x='x', y='y', color='label', animation_frame='id', range_x=[-5, 5], range_y=[-5, 5])
 # fig.update_yaxes(dtick=0.5)
 # fig.update_xaxes(dtick=0.5)
