@@ -2,7 +2,7 @@ Notes!
 
 Running: Rede neural SONDE
 
-DTW - corredor maior: 28hs
+DTW - corredor maior: 28hs / ERROR: detecta encruzilhada esquerda e encruzilhada direta como um unico estado, pois possui só um pico de cluster diferente.
 
 Error: DBSCAN da média das distâncias dos clusters formados -> clusters podem estar proximos e separados do quadrado do corredor.
 
