@@ -1,0 +1,13 @@
+Notes!
+
+Running: Rede neural SONDE
+
+DTW - corredor maior: 28hs
+
+Error: DBSCAN da média das distâncias dos clusters formados -> clusters podem estar proximos e separados do quadrado do corredor.
+
+Error: Analisar o afastamento e a aproximação -> numero impar de clusters impede fazer de forma automática.
+
+Error: DBSCAN na lista de labels_ gerados -> os clusters variam de posição conforme o robô anda e as dimensões fixas fazem com
+que estar próximo de uma saída a direita é um cluster e estar afastado é outro independente se o robô está entre elas,
+o que significa estar no corredor.
