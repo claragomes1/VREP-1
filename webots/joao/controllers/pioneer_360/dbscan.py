@@ -73,7 +73,7 @@ def DBSCAN_stage_1():
 
 
 @timer
-def animation():
+def animation_stage_1():
     topography_df = pd.read_csv('topography_df.csv', index_col=0)
     fig = px.scatter(topography_df, x='x', y='y', color='label', animation_frame='id', range_x=[-5, 5], range_y=[-5, 5])
     fig.update_yaxes(dtick=0.5)
@@ -94,10 +94,21 @@ def DBSCAN_stage_2():
         labels_matrix.append(list(topography_df['label'][i * 360:(i + 1) * 360]))
     labels_df = pd.DataFrame(labels_matrix)
     dbscan = DBSCAN(eps=8, metric=dtw_metric).fit(labels_df)
-    fig = px.scatter(y=dbscan.labels_)
-    fig.show()
-    pd.DataFrame(dbscan.labels_).to_csv('dbscan_labels.csv')
+    labels_df['label'] = dbscan.labels_
+    labels_df.to_csv('labels_df')
 
 
-DBSCAN_stage_1()
-DBSCAN_stage_2()
+def animation_stage_2():
+    labels_list = []
+    labels_df = pd.read_csv('labels_df.csv', index_col=0)
+    for line in labels_df.iloc:
+        for value in line:
+            labels_list.append(value)
+    print(labels_list)
+    # print(labels_list)
+
+
+# DBSCAN_stage_1()
+# animation_stage_1()
+# DBSCAN_stage_2()
+animation_stage_2()
