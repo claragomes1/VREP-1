@@ -2,15 +2,15 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.48872703367972486 -0.7120186612509825 -0.5041580234221965 4.361994910447609
-  position 7.334682932804024 17.756858757353644 0.951882575239984
+  orientation 0.551245776574053 -0.6265969298170154 -0.5509123173002757 4.2727241777007725
+  position 3.15272814531618 17.949705239740638 1.2159373346694797
 }
 TexturedBackground {
 }
 TexturedBackgroundLight {
 }
 Solid {
-  translation 0.83 0 0
+  translation 0.83 0 -0.34
   children [
     Group {
       children [
@@ -150,9 +150,9 @@ Solid {
               }
             }
             Wall {
-              translation 4.37 0 3.45
+              translation 2.55 0 3.45
               name "wall(9)"
-              size 6 1 0.1
+              size 2 1 0.1
               appearance Roughcast {
                 colorOverride 0.7 0.7 0.7
                 textureTransform TextureTransform {
@@ -303,9 +303,9 @@ Solid {
       }
     }
     Wall {
-      translation 0.91 0 -0.05
+      translation 1.57 0 -0.05
       name "wall(9)"
-      size 6 1 0.1
+      size 4 1 0.1
       appearance Roughcast {
         colorOverride 0.7 0.7 0.7
         textureTransform TextureTransform {
@@ -314,7 +314,7 @@ Solid {
       }
     }
     Wall {
-      translation 3.28 0 -0.05
+      translation -1.73 0 -0.05
       name "wall(9)"
       size 3.6 1 0.1
       appearance Roughcast {
@@ -329,9 +329,26 @@ Solid {
   rotationStep 0.261797
 }
 Pioneer3dx {
-  translation 2.25812 0.137001 0.67001
-  rotation 0.01460973124649915 0.9997865479954517 -0.0146087028939401 1.5710135915404349
-  controller "pioneer_test"
+  hidden position_0_0 5.096454239191822e-10
+  hidden position_0_1 2.3039986100747085
+  hidden position_0_2 2.3039986105905896
+  hidden linearVelocity_0 -0.2925533820861869 -1.6509747220078314e-06 -1.17111745636904e-05
+  hidden angularVelocity_0 -1.2314441907975468e-07 -1.3903467754802118e-07 0.00033920445599486693
+  hidden position_1_0 -5.95237004541791
+  hidden linearVelocity_1 -0.2925206049217215 4.355898041172403e-05 -1.1689492164693725e-05
+  hidden angularVelocity_1 -1.2238810470674172e-07 -1.4608105228235655e-07 0.0003392094451364313
+  hidden rotation_2 -1 0 0 5.95237004541791
+  hidden linearVelocity_2 -0.2925137239501175 4.7025899939462806e-05 -1.1694298577153055e-05
+  hidden angularVelocity_2 -0.0003119706578746109 -8.761302048266527e-06 7.800365972837125
+  hidden rotation_4 -1 0 0 2.3039986100747085
+  hidden linearVelocity_4 -0.29253308829318203 -2.0714969621194962e-05 -1.1708238415516708e-05
+  hidden angularVelocity_4 -0.00012006088513767523 -3.4503907961397987e-06 3.0003392052233644
+  hidden rotation_9 -1 0 0 2.3039986105905896
+  hidden linearVelocity_9 -0.29253307395566885 -2.0750714654068402e-05 -1.170823666093456e-05
+  hidden angularVelocity_9 -0.00012006088502822677 -3.4503909661231354e-06 3.0003392024797138
+  translation 3.823928036694932 0.09492763984425129 4.089677741639194
+  rotation 0.014631278498056824 0.9997859274500231 -0.014629592011032932 1.5709704553331545
+  controller "navegacao"
   extensionSlot [
     SickLms291 {
       translation 0 0.22 0
