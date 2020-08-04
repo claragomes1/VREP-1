@@ -59,7 +59,7 @@ cluster.fit_predict(datasetNoLabel)
 print(cluster.labels_)
 
 
-dataset2 = pd.concat([saida_direita, saida_esquerda, saida_direita_esquerda, encruzilhada_esquerda, encruzilhada_direita, encruzilhada, corredor, teste, testesd], axis=0, ignore_index=True)
+dataset2 = pd.concat([dataset, testesd], axis=0, ignore_index=True)
 dataset2.head()
 
 dataset2['label'] = dataset2['label'].replace('saida_direita',0)
@@ -95,10 +95,10 @@ s4 = statistics.mode(cluster2.labels_[3000:3999])
 s5 = statistics.mode(cluster2.labels_[4000:4999])
 s6 = statistics.mode(cluster2.labels_[5000:5999])
 s7 = statistics.mode(cluster2.labels_[6000:6999])
-newS = statistics.mode(cluster2.labels_[7056:8000])
+newS = statistics.mode(cluster2.labels_[7005])
 
 if newS == s1:
-    print("saida direita")
+    print("saida direita")#return 0
 if newS == s2:
     print("saida_esquerda")
 if newS == s3:
