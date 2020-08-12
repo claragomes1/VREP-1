@@ -13,6 +13,7 @@ import scipy.cluster.hierarchy as shc
 from sklearn.cluster import AgglomerativeClustering
 from sklearn.preprocessing import normalize
 from sklearn import metrics
+import statistics
 
 saida_direita = pd.read_csv('saida_direita.csv', index_col='object')
 saida_esquerda = pd.read_csv('saida_esquerda.csv', index_col = 'object')
@@ -23,7 +24,9 @@ encruzilhada = pd.read_csv('encruzilhada.csv', index_col='object')
 corredor = pd.read_csv('corredor.csv', index_col='object')
 #teste = pd.read_csv('corredor_encruzilhada_corredor_esquerda.csv', index_col='object')
 #teste = pd.read_csv('corredor_edireita_corredor_sdireita.csv', index_col='object')
-#teste = pd.read_csv('encruzilhadaEsquerda_corredor_ee_c_saidaEsquerda.csv', index_col='object')
+##teste = pd.read_csv('encruzilhadaEsquerda_corredor_ee_c_saidaEsquerda.csv', index_col='object')
+teste = pd.read_csv('teste.csv', index_col='object')
+testesd = pd.read_csv('testesd.csv', index_col='object')
 
 
 dataset = pd.concat([saida_direita, saida_esquerda, saida_direita_esquerda, encruzilhada_esquerda, encruzilhada_direita, encruzilhada, corredor], axis=0, ignore_index=True)
@@ -55,27 +58,8 @@ cluster = AgglomerativeClustering(n_clusters=7, affinity='euclidean', linkage='w
 cluster.fit_predict(datasetNoLabel)
 print(cluster.labels_)
 
-tamanhosCluster = [];
-indiceCluster = [];
-indice = 0;
-var = [];
-for  valor in cluster.labels_:
-    var.append(valor);
-    if indice == 0:
-        valorAnt = valor;
-    if valorAnt != valor :
-        for x in indiceCluster:
-            if valorAnt == x:
-                continue
-            else:
-                tamanhosCluster.append(indice - 1);
-                indiceCluster.append(valorAnt);
-        
-        indice = 0;
-    indice = indice + 1;
-    valorAnt = valor;
-    
-dataset2 = pd.concat([saida_direita,saida_direita, saida_esquerda, saida_direita_esquerda, encruzilhada_esquerda, encruzilhada_direita, encruzilhada, corredor], axis=0, ignore_index=True)
+
+dataset2 = pd.concat([dataset, testesd], axis=0, ignore_index=True)
 dataset2.head()
 
 dataset2['label'] = dataset2['label'].replace('saida_direita',0)
@@ -104,34 +88,29 @@ cluster2 = AgglomerativeClustering(n_clusters=7, affinity='euclidean', linkage='
 cluster2.fit_predict(datasetNoLabel2)
 print(cluster2.labels_)
 
-NtamanhosCluster = [];
-NindiceCluster = [];
+s1 = statistics.mode(cluster2.labels_[0:999])
+s2 = statistics.mode(cluster2.labels_[1000:1999])
+s3 = statistics.mode(cluster2.labels_[2000:2999])
+s4 = statistics.mode(cluster2.labels_[3000:3999])
+s5 = statistics.mode(cluster2.labels_[4000:4999])
+s6 = statistics.mode(cluster2.labels_[5000:5999])
+s7 = statistics.mode(cluster2.labels_[6000:6999])
+newS = statistics.mode(cluster2.labels_[7005])
 
-indice = 0;
-var2 = [];
-for valor2 in cluster2.labels_:
-    var2.append(valor2);
-    if indice == 0:
-        valorAnt2 = valor2;
-    if valorAnt2 != valor2 :
-        NtamanhosCluster.append(indice - 1);
-        NindiceCluster.append(valorAnt2);
-    valorAnt2 = valor2;
-    indice = indice + 1;
-
-#v = [];
-
-#for pos in range(6):
-#    v.append(NtamanhosCluster[pos] - tamanhosCluster[pos]);
-
-
-
-
-
-
-
-
-
+if newS == s1:
+    print("saida direita")#return 0
+if newS == s2:
+    print("saida_esquerda")
+if newS == s3:
+     print("saida_direita_esquerda")
+if newS == s4:
+     print("encruzilhada_esquerda")
+if newS == s5:
+     print("encruzilhada_direita")
+if newS == s6:
+     print("encruzilhada")
+if newS == s7:
+     print("corredor")
 
 
 

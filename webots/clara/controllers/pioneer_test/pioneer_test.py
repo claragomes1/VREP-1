@@ -2,7 +2,7 @@
 
 from controller import Robot, Motor, Lidar
 import time
-import pandas as pd
+
 
 TIME_STEP = 32
 
@@ -34,4 +34,4 @@ while robot.step(TIME_STEP) != -1:#Sincroniza os dados do controlador com o simu
 
 
 rangeImageCompleteDf = pd.DataFrame(rangeImageComplete)
-rangeImageCompleteDf.to_csv('corredor_encruzilhada_corredor_esquerda.csv')
+rangeImageCompleteDf.to_csv('deuErrado.csv')
