@@ -2,6 +2,7 @@
 
 from controller import Robot, Motor, Lidar
 import time
+import pandas as pd
 
 
 TIME_STEP = 32
@@ -23,8 +24,14 @@ right_wheel.setPosition(float('inf'))
 right_wheel.setVelocity(3.0)
 
 robot.step(TIME_STEP)
+robot.step(TIME_STEP)
+robot.step(TIME_STEP)
+robot.step(TIME_STEP)
+robot.step(TIME_STEP)
+robot.step(TIME_STEP)
 
 rangeImageComplete = []
+rangeImage = lidar.getRangeImage()
 
 
 #retorna -1 quando o Webots finalizar o controlador
@@ -32,6 +39,5 @@ while robot.step(TIME_STEP) != -1:#Sincroniza os dados do controlador com o simu
     rangeImage = lidar.getRangeImage()#Pega os dados de cada ponto
     rangeImageComplete.append(rangeImage)
 
-
 rangeImageCompleteDf = pd.DataFrame(rangeImageComplete)
-rangeImageCompleteDf.to_csv('deuErrado.csv')
+rangeImageCompleteDf.to_csv('novoArquivo.csv')
