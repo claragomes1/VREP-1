@@ -4,10 +4,12 @@ from time import time
 import pandas as pd
 import numpy as np
 from sklearn.cluster import DBSCAN
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.cluster import OPTICS
 from scipy.spatial import distance
 from dtw import *
 import plotly.express as px
-from sklearn.decomposition import PCA
+
 
 
 def timer(function):
@@ -24,64 +26,64 @@ def timer(function):
 
 
 @timer
-def get_data():
-    return pd.read_csv('leitura2.csv', index_col=0)
-
-
-@timer
-def dbscan_stage_1():
-    leitura_df = get_data()
-    x_complete = []
-    y_complete = []
-    id_complete = []
+def get_db(csv):
+    db_df = pd.read_csv(csv, index_col=0)
+    xs = []
+    ys = []
+    ids = []
     id = -1
-    labels_complete = []
-    for line in leitura_df.values:
+    distances = []
+    for reading in db_df.values:
         id += 1
-        x = []
-        y = []
-        for i in range(len(line)):
-            x.append(line[i] * math.cos(math.radians(i - 90)))
-            y.append(line[i] * math.sin(math.radians(i - 90)))
-        x_y_df = pd.DataFrame(data={'x': x, 'y': y})
-        dbscan = DBSCAN(eps=3, metric='euclidean').fit(x_y_df)
-        labels_temp = [-1] * len(dbscan.labels_)
-        label_counter = 0
-        visited = 0
-        while visited < len(dbscan.labels_):
-            cluster = dbscan.labels_[np.where(dbscan.labels_ != -2)[0][0]]
-            index_list = np.where(dbscan.labels_ == cluster)[0]
-            for index in index_list:
-                if cluster != -1:
-                    labels_temp[index] = label_counter
-                dbscan.labels_[index] = -2
-                visited += 1
-            if cluster != -1:
-                label_counter += 1
-        for each in x:
-            x_complete.append(each)
-        for each in y:
-            y_complete.append(each)
-        for each in [id] * len(line):
-            id_complete.append(each)
-        for each in labels_temp:
-            labels_complete.append(each)
-    distance_complete = []
-    for reading in range(len(leitura_df)):
-        for degree in leitura_df.values[reading]:
-            distance_complete.append(degree)
-    topography_df = pd.DataFrame(data={'x': x_complete, 'y': y_complete, 'distance': distance_complete, 'id': id_complete, 'label': labels_complete})
-    topography_df.to_csv('topography_df.csv')
+        for degree in range(len(reading)):
+            xs.append(reading[degree] * math.cos(math.radians(degree - 90)))
+            ys.append(reading[degree] * math.sin(math.radians(degree - 90)))
+            ids.append(id)
+            distances.append(degree)
+    db = pd.DataFrame(data={'x': xs, 'y': ys, 'distance': distances, 'id': ids})
+    db.to_csv('DB.csv')
+
+@timer
+def dbscan_x_y():
+    db_df = pd.read_csv('DB.csv', index_col=0)
+    labels = []
+    for i in range(int(len(db_df) / 360)):
+        x_y_df = db_df.loc[db_df['id'] == i][['x', 'y']]
+        dbscan = DBSCAN(eps=3, min_samples=3, metric='euclidean').fit(x_y_df)
+        for label in dbscan.labels_:
+            labels.append(label)
+    db_df['label'] = labels
+    db_df.to_csv('DB.csv')
 
 
 @timer
-def animation_stage_1():
-    topography_df = pd.read_csv('topography_df.csv', index_col=0)
-    fig = px.scatter(topography_df, x='x', y='y', color='label', animation_frame='id', range_x=[-45, 45], range_y=[-45, 45])
+def animation():
+    db_df = pd.read_csv('DB.csv', index_col=0)
+    fig = px.scatter(db_df, x='x', y='y', color='label', animation_frame='id', range_x=[-45, 45], range_y=[-45, 45])
     fig.update_yaxes(dtick=1)
     fig.update_xaxes(dtick=1)
     fig.update_layout(height=500, width=500, title_text="Animacao dos pontos no corredor")
     fig.show()
+
+
+@timer
+def optics():
+    db_df = pd.read_csv('DB.csv', index_col=0)
+    optics = OPTICS().fit(db_df)
+    reachability = optics.reachability_[optics.ordering_]
+    fig = px.scatter(reachability)
+    fig.show()
+
+
+get_db('leitura.csv')
+dbscan_x_y()
+animation() #445136ms
+optics()
+
+get_db('leitura2.csv')
+dbscan_x_y()
+animation() #445136ms
+optics()
 
 
 class Neuron:
@@ -167,43 +169,27 @@ def dtw_metric(x, y):
 
 
 @timer
-def labels_df_stage_2():
-    topography_df = pd.read_csv('topography_df.csv', index_col=0)
-    labels_matrix = []
-    for i in range(int(len(topography_df) / 360)):
-        labels_matrix.append(list(topography_df['label'][i * 360:(i + 1) * 360]))
-    labels_df = pd.DataFrame(labels_matrix)
-    labels_df.to_csv('labels_df.csv')
-
-
-@timer
-def sonde_stage_3():
-    labels_df = pd.read_csv('labels_df.csv', index_col=0)
-    # Running SONDE without annimation
-    sonde = Sonde(alphaZero=0.1, gamma=0.01, omega=0.01, distance=dtw_metric)
+def sonde_stage_3(csv):
+    leitura_df = pd.read_csv(csv, index_col=0)
+    leitura_df = pd.DataFrame(MinMaxScaler(feature_range=(0, 1)).fit_transform(leitura_df))
+    sonde = Sonde(alphaZero=0.0001, gamma=0.00000000000000001, omega=0.00000000000000001, distance=dtw_metric)
     listClusters = []
-    for i in range(len(labels_df)):
-      instance = labels_df.iloc[i]
+    for i in range(len(leitura_df)):
+      instance = leitura_df.iloc[i]
       clusterResult = sonde.execute(instance)
       listClusters.append(clusterResult)
     fig = px.scatter(listClusters, y=listClusters)
     fig.show()
 
 
-def teste():
-    leitura2_df = pd.read_csv('leitura2.csv', index_col=0)
+@timer
+def teste(csv):
+    leitura_df = pd.read_csv(csv + '.csv', index_col=0)
+    leitura_df = pd.DataFrame(MinMaxScaler(feature_range=(0, 1)).fit_transform(leitura_df))
     lista = []
-    for i in range(len(leitura2_df)):
-        lista.append(dtw(leitura2_df.iloc[0], leitura2_df.iloc[i], keep_internals=True, step_pattern="symmetric1").distance)
+    for i in range(len(leitura_df)):
+        lista.append(dtw(leitura_df.iloc[30], leitura_df.iloc[i], keep_internals=True, step_pattern=rabinerJuangStepPattern(6, "c")).distance)
     fig = px.scatter(lista, y=lista)
     fig.show()
-    # dtw(labels_df.iloc[311], labels_df.iloc[580], keep_internals=True, step_pattern=rabinerJuangStepPattern(6, "c")).plot(type="twoway", offset=-2)
+    # dtw(leitura_df.iloc[30], leitura_df.iloc[2300], keep_internals=True, step_pattern=rabinerJuangStepPattern(6, "c")).plot(type="twoway", offset=-2)
     # print(dtw(labels_df.iloc[311], labels_df.iloc[580], keep_internals=True, step_pattern=rabinerJuangStepPattern(6, "c")).distance)
-
-
-# get_data()            #100ms
-# dbscan_stage_1()      #11909ms
-# labels_df_stage_2()
-# animation_stage_1()     #419994ms
-# SONDE_stage_3()
-teste()
