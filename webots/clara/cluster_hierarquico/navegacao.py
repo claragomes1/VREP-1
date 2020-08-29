@@ -15,18 +15,18 @@ from sklearn.preprocessing import normalize
 from sklearn import metrics
 import statistics
 
-saida_direita = pd.read_csv('saida_direita.csv', index_col='object')
-saida_esquerda = pd.read_csv('saida_esquerda.csv', index_col = 'object')
-saida_direita_esquerda = pd.read_csv('saida_direita_esquerda.csv', index_col='object')
-encruzilhada_esquerda = pd.read_csv('encruzilhada_esquerda.csv', index_col='object')
-encruzilhada_direita = pd.read_csv('encruzilhada_direita.csv', index_col='object')
-encruzilhada = pd.read_csv('encruzilhada.csv', index_col='object')
-corredor = pd.read_csv('corredor.csv', index_col='object')
+saida_direita = pd.read_csv('saida_direita.csv')
+saida_esquerda = pd.read_csv('saida_esquerda.csv')
+saida_direita_esquerda = pd.read_csv('saida_direita_esquerda.csv')
+encruzilhada_esquerda = pd.read_csv('encruzilhada_esquerda.csv')
+encruzilhada_direita = pd.read_csv('encruzilhada_direita.csv')
+encruzilhada = pd.read_csv('encruzilhada.csv')
+corredor = pd.read_csv('corredor.csv')
 #teste = pd.read_csv('corredor_encruzilhada_corredor_esquerda.csv', index_col='object')
 #teste = pd.read_csv('corredor_edireita_corredor_sdireita.csv', index_col='object')
 ##teste = pd.read_csv('encruzilhadaEsquerda_corredor_ee_c_saidaEsquerda.csv', index_col='object')
-teste = pd.read_csv('teste.csv', index_col='object')
-testesd = pd.read_csv('testesd.csv', index_col='object')
+teste = pd.read_csv('teste.csv')
+testesd = pd.read_csv('testesd.csv')
 
 
 dataset = pd.concat([saida_direita, saida_esquerda, saida_direita_esquerda, encruzilhada_esquerda, encruzilhada_direita, encruzilhada, corredor], axis=0, ignore_index=True)
@@ -41,7 +41,8 @@ dataset['label'] = dataset['label'].replace('encruzilhada',5)
 dataset['label'] = dataset['label'].replace('corredor',6)
 
 
-datasetNoLabel = dataset.drop(columns=['label'])
+datasetNoLabel1 = dataset.drop(columns=['label'])
+datasetNoLabel = datasetNoLabel1.drop(columns=['object'])
 print(datasetNoLabel)
 
 datasetNoLabel = normalize(datasetNoLabel)
@@ -59,7 +60,7 @@ cluster.fit_predict(datasetNoLabel)
 print(cluster.labels_)
 
 
-dataset2 = pd.concat([dataset, testesd], axis=0, ignore_index=True)
+dataset2 = pd.concat([dataset, encruzilhada], axis=0, ignore_index=True)
 dataset2.head()
 
 dataset2['label'] = dataset2['label'].replace('saida_direita',0)
@@ -71,7 +72,8 @@ dataset2['label'] = dataset2['label'].replace('encruzilhada',5)
 dataset2['label'] = dataset2['label'].replace('corredor',6)
 
 
-datasetNoLabel2 = dataset2.drop(columns=['label'])
+datasetNoLabel2Aux = dataset2.drop(columns=['label'])
+datasetNoLabel2 = datasetNoLabel2Aux.drop(columns=['object'])
 print(datasetNoLabel2)
 
 datasetNoLabel2 = normalize(datasetNoLabel2)
@@ -87,6 +89,13 @@ plt.axhline(y=10, color='r', linestyle='--')
 cluster2 = AgglomerativeClustering(n_clusters=7, affinity='euclidean', linkage='ward')
 cluster2.fit_predict(datasetNoLabel2)
 print(cluster2.labels_)
+print(datasetNoLabel2)
+
+tamanhoLista = len(cluster2.labels_)
+inicioTamanho = tamanhoLista - 51
+
+print(tamanhoLista)
+print(inicioTamanho)
 
 s1 = statistics.mode(cluster2.labels_[0:999])
 s2 = statistics.mode(cluster2.labels_[1000:1999])
@@ -95,7 +104,7 @@ s4 = statistics.mode(cluster2.labels_[3000:3999])
 s5 = statistics.mode(cluster2.labels_[4000:4999])
 s6 = statistics.mode(cluster2.labels_[5000:5999])
 s7 = statistics.mode(cluster2.labels_[6000:6999])
-newS = statistics.mode(cluster2.labels_[7005])
+newS = statistics.mode(cluster2.labels_[inicioTamanho:tamanhoLista])
 
 if newS == s1:
     print("saida direita")#return 0
