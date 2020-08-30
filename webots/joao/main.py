@@ -11,7 +11,6 @@ from dtw import *
 import plotly.express as px
 
 
-
 def timer(function):
     @wraps(function)
     def _time_it(*args, **kwargs):
@@ -39,9 +38,10 @@ def get_db(csv):
             xs.append(reading[degree] * math.cos(math.radians(degree - 90)))
             ys.append(reading[degree] * math.sin(math.radians(degree - 90)))
             ids.append(id)
-            distances.append(degree)
+            distances.append(reading[degree])
     db = pd.DataFrame(data={'x': xs, 'y': ys, 'distance': distances, 'id': ids})
     db.to_csv('DB.csv')
+
 
 @timer
 def dbscan_x_y():
@@ -52,14 +52,14 @@ def dbscan_x_y():
         dbscan = DBSCAN(eps=3, min_samples=3, metric='euclidean').fit(x_y_df)
         for label in dbscan.labels_:
             labels.append(label)
-    db_df['label'] = labels
+    db_df['dbscan_x_y_label'] = labels
     db_df.to_csv('DB.csv')
 
 
 @timer
 def animation():
     db_df = pd.read_csv('DB.csv', index_col=0)
-    fig = px.scatter(db_df, x='x', y='y', color='label', animation_frame='id', range_x=[-45, 45], range_y=[-45, 45])
+    fig = px.scatter(db_df, x='x', y='y', color='dbscan_x_y_label', animation_frame='id', range_x=[-45, 45], range_y=[-45, 45])
     fig.update_yaxes(dtick=1)
     fig.update_xaxes(dtick=1)
     fig.update_layout(height=500, width=500, title_text="Animacao dos pontos no corredor")
@@ -68,22 +68,29 @@ def animation():
 
 @timer
 def optics():
-    db_df = pd.read_csv('DB.csv', index_col=0)
+    db_df = pd.read_csv('DB.csv', index_col=0).iloc[::10]
     optics = OPTICS().fit(db_df)
     reachability = optics.reachability_[optics.ordering_]
     fig = px.scatter(reachability)
     fig.show()
 
 
-get_db('leitura.csv')
-dbscan_x_y()
-animation() #445136ms
-optics()
-
-get_db('leitura2.csv')
-dbscan_x_y()
-animation() #445136ms
-optics()
+@timer
+def dbscan():
+    db_df = pd.read_csv('DB.csv', index_col=0)
+    distance_complete = []
+    for i in range(int(len(db_df) / 360)):
+        distance_complete.append(db_df.loc[db_df['id'] == i]['distance'].values)
+    distance_df = pd.DataFrame(distance_complete)
+    dbscan = DBSCAN(eps=3).fit(distance_df)
+    labels = []
+    for label in dbscan.labels_:
+        for each in range(1, 361):
+            labels.append(label)
+    fig = px.scatter(dbscan.labels_)
+    fig.show()
+    db_df['dbscan_label'] = labels
+    db_df.to_csv('DB.csv')
 
 
 class Neuron:
@@ -165,17 +172,16 @@ class Sonde:
 
 
 def dtw_metric(x, y):
-    return dtw(x, y, keep_internals=True, step_pattern="symmetric1").distance
+    return dtw(x, y, keep_internals=True, step_pattern=rabinerJuangStepPattern(6, "c")).distance
 
 
 @timer
-def sonde_stage_3(csv):
-    leitura_df = pd.read_csv(csv, index_col=0)
-    leitura_df = pd.DataFrame(MinMaxScaler(feature_range=(0, 1)).fit_transform(leitura_df))
+def sonde_stage_3():
+    db_df = pd.read_csv('DB.csv', index_col=0)
     sonde = Sonde(alphaZero=0.0001, gamma=0.00000000000000001, omega=0.00000000000000001, distance=dtw_metric)
     listClusters = []
-    for i in range(len(leitura_df)):
-      instance = leitura_df.iloc[i]
+    for i in range(len(db_df)):
+      instance = db_df.iloc[i]
       clusterResult = sonde.execute(instance)
       listClusters.append(clusterResult)
     fig = px.scatter(listClusters, y=listClusters)
@@ -193,3 +199,10 @@ def teste(csv):
     fig.show()
     # dtw(leitura_df.iloc[30], leitura_df.iloc[2300], keep_internals=True, step_pattern=rabinerJuangStepPattern(6, "c")).plot(type="twoway", offset=-2)
     # print(dtw(labels_df.iloc[311], labels_df.iloc[580], keep_internals=True, step_pattern=rabinerJuangStepPattern(6, "c")).distance)
+
+
+get_db('leitura2.csv')
+dbscan_x_y()
+animation() #450000ms
+# optics() #5->2659690  #10->10 min
+# dbscan()
