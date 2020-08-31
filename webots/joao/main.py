@@ -49,7 +49,7 @@ def dbscan_x_y():
     labels = []
     for i in range(int(len(db_df) / 360)):
         x_y_df = db_df.loc[db_df['id'] == i][['x', 'y']]
-        dbscan = DBSCAN(eps=3, min_samples=3, metric='euclidean').fit(x_y_df)
+        dbscan = DBSCAN(eps=1, min_samples=3, metric='euclidean').fit(x_y_df)
         for label in dbscan.labels_:
             labels.append(label)
     db_df['dbscan_x_y_label'] = labels
@@ -82,7 +82,7 @@ def dbscan():
     for i in range(int(len(db_df) / 360)):
         distance_complete.append(db_df.loc[db_df['id'] == i]['distance'].values)
     distance_df = pd.DataFrame(distance_complete)
-    dbscan = DBSCAN(eps=3).fit(distance_df)
+    dbscan = DBSCAN(eps=1).fit(distance_df)
     labels = []
     for label in dbscan.labels_:
         for each in range(1, 361):
@@ -91,6 +91,12 @@ def dbscan():
     fig.show()
     db_df['dbscan_label'] = labels
     db_df.to_csv('DB.csv')
+
+
+get_db('leitura1.csv')
+dbscan()
+dbscan_x_y()
+animation()
 
 
 class Neuron:
@@ -199,10 +205,3 @@ def teste(csv):
     fig.show()
     # dtw(leitura_df.iloc[30], leitura_df.iloc[2300], keep_internals=True, step_pattern=rabinerJuangStepPattern(6, "c")).plot(type="twoway", offset=-2)
     # print(dtw(labels_df.iloc[311], labels_df.iloc[580], keep_internals=True, step_pattern=rabinerJuangStepPattern(6, "c")).distance)
-
-
-get_db('leitura2.csv')
-dbscan_x_y()
-animation() #450000ms
-# optics() #5->2659690  #10->10 min
-# dbscan()
